@@ -18,7 +18,7 @@ if __name__ == '__main__':
     arbol.Insertar(10)
     arbol.In_Orden()
     print(" ")
-    arbol.Padre_Hermano(9)
+    arbol.Padre_Hermano(2)
     c= arbol.Cantidad_Nodos()
     print(f"Cantidad de nodos: {c}")
     altura = arbol.Altura()

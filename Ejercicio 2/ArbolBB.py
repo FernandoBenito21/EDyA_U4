@@ -100,29 +100,33 @@ class Arbol_Binario_Busqueda:
         if (nodo.getDato() == x):
             print("El nodo ingresado es la raiz, no tiene padre ni hermano")
         else:
-            padre = self.Padre_Recursivo(nodo, nodo, x)
+            padre = self.Padre_Recursivo(nodo, x)
             if (padre == None):
                 print ("El nodo ingresado no existe")
             else:
                 print(f"El padre del nodo Ingresado es: {padre.getDato()}")
-                if (padre.getIzq() != None):
+                if (padre.Grado() == 2):
                     if (padre.getIzq().getDato() == x):
-                        if (padre.getDer() == None):
-                            print("El nodo no tiene hermano")
-                        else:
-                            print(f"El hermano del nodo es: {padre.getDer().getDato()}")
+                        print(f"El hermano del nodo es: {padre.getDer().getDato()}")
+                    else:
+                        print(f"El hermano del nodo es: {padre.getIzq().getDato()}")
                 else:
                     print("El nodo no tiene hermano")
         
-    def Padre_Recursivo(self, nodo, padre, x):
-        if nodo is None:
-            return (None)
-        if (nodo.getDato() == x):
-            return padre
-        if x < nodo.getDato():
-            return self.Padre_Recursivo(nodo.getIzq(), nodo, x)
+    
+    def Padre_Recursivo(self, nodo, x):
+        if (nodo.Grado() == 0) and (nodo.getDato() != x):
+            return None
+        if (x < nodo.getDato()):
+            if (nodo.getIzq().getDato() == x):
+                return nodo
+            else:
+                return self.Padre_Recursivo(nodo.getIzq(), x)
         else:
-            return self.Padre_Recursivo(nodo.getDer(), nodo, x)
+            if (nodo.getDer().getDato() == x):
+                return nodo
+            else:
+                return self.Padre_Recursivo(nodo.getDer(), x)
     
     
     def Cantidad_Nodos(self):
@@ -163,7 +167,7 @@ class Arbol_Binario_Busqueda:
                 if (nodo.Grado() == 0):
                     print("El nodo ingresado es hoja")
                 else:
-                    print(f"Los hiojs son:\n Izquierdo: {nodo.getIzq().getDato()}\n Derecho: {nodo.getDer().getDato()}")
+                    print(f"Los hijos son:\n Izquierdo: {nodo.getIzq().getDato()}\n Derecho: {nodo.getDer().getDato()}")
             else:
                 if (x < nodo.getDato()):
                     self.Sucesores_Recursivo(nodo.getIzq(), x)
