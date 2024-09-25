@@ -45,15 +45,19 @@ class Arbol_Binario_Busqueda:
             else:
                 if(x > nodo.getDato()):
                     nodo.setDer(self.Suprimir_Recursivo(x, nodo.getDer()))
-                else:
-                    if (nodo.getIzq() == None):
-                        return nodo.getDer() 
+               else:
+                    if (nodo.grado() == 0):
+                        return None
                     else:
-                        if (nodo.getDer() == None):
-                            return nodo.getIzq()
-                    cambio = self.Busca_Menor_Derecho(nodo.getDer())
-                    nodo.setDato(cambio.getDato())
-                    nodo.setDer(self.Suprimir_Recursivo(cambio.getDato(), nodo.getDer()))
+                        if (nodo.grado() == 1):
+                            if (nodo.getIzq() == None):
+                                return nodo.getDer() 
+                            else:
+                                return nodo.getIzq()
+                        else:
+                            cambio = self.Busca_Menor_Derecho(nodo.getDer())
+                            nodo.setDato(cambio.getDato())
+                            nodo.setDer(self.Suprimir_Recursivo(cambio.getDato(), nodo.getDer()))
         return nodo
                         
     def Busca_Menor_Derecho(self, nodo):
