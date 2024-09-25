@@ -33,7 +33,8 @@ class Arbol_Binario_Busqueda:
     
     def Suprimir(self, x):
         nodo = self.__raiz
-        self.Suprimir_Recursivo(x, nodo)
+        retorna = self.Suprimir_Recursivo(x, nodo)
+        return retorna
     
     def Suprimir_Recursivo(self, x, nodo):
         if (nodo == None):
@@ -45,7 +46,7 @@ class Arbol_Binario_Busqueda:
             else:
                 if(x > nodo.getDato()):
                     nodo.setDer(self.Suprimir_Recursivo(x, nodo.getDer()))
-               else:
+                else:
                     if (nodo.grado() == 0):
                         return None
                     else:
