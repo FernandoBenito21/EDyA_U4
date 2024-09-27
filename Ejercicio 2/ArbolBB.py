@@ -6,8 +6,10 @@ class Arbol_Binario_Busqueda:
     def __init__(self):
         self.__raiz = None
     
+    
     def Vacio(self):
         return self.__raiz == None
+        
         
     def Insertar(self, x):
         if (self.__raiz == None):
@@ -30,6 +32,7 @@ class Arbol_Binario_Busqueda:
                     nodo.setDer(Nodo(x))
                 else:
                     self.Insertar_Recursivo(x, nodo.getDer())
+    
     
     def Suprimir(self, x):
         nodo = self.__raiz
@@ -103,7 +106,7 @@ class Arbol_Binario_Busqueda:
     def Padre_Hermano(self, x):
         nodo = self.__raiz
         if (nodo.getDato() == x):
-            print("El nodo ingresado es la raiz, no tiene padre ni hermano")
+            print("El nodo ingresado es la raiz")
         else:
             padre = self.Padre_Recursivo(nodo, x)
             if (padre == None):
@@ -118,20 +121,23 @@ class Arbol_Binario_Busqueda:
                 else:
                     print("El nodo no tiene hermano")
         
-    
     def Padre_Recursivo(self, nodo, x):
-        if (nodo.Grado() == 0) and (nodo.getDato() != x):
-            return None
         if (x < nodo.getDato()):
-            if (nodo.getIzq().getDato() == x):
-                return nodo
+            if (nodo.getIzq() == None):
+                return None
             else:
-                return self.Padre_Recursivo(nodo.getIzq(), x)
+                if (nodo.getIzq().getDato() == x):
+                    return nodo
+                else:
+                    return self.Padre_Recursivo(nodo.getIzq(), x)
         else:
-            if (nodo.getDer().getDato() == x):
-                return nodo
+            if (nodo.getDer() == None):
+                return None
             else:
-                return self.Padre_Recursivo(nodo.getDer(), x)
+                if (nodo.getDer().getDato() == x):
+                    return nodo
+                else:
+                    return self.Padre_Recursivo(nodo.getDer(), x)
     
     
     def Cantidad_Nodos(self):
@@ -172,7 +178,13 @@ class Arbol_Binario_Busqueda:
                 if (nodo.Grado() == 0):
                     print("El nodo ingresado es hoja")
                 else:
-                    print(f"Los hijos son:\n Izquierdo: {nodo.getIzq().getDato()}\n Derecho: {nodo.getDer().getDato()}")
+                    if (nodo.grado() == 1):
+                        if (nodo.getIzq() == None):
+                            print (f"El sucesor derecho del arbol es: {nodo.getDer().getDato()}")
+                        else:
+                            print (f"El sucesor izquierdo del arbol es: {nodo.getIzq().getDato()}")
+                    else:
+                        print(f"Los hijos son:\n Izquierdo: {nodo.getIzq().getDato()}\n Derecho: {nodo.getDer().getDato()}")
             else:
                 if (x < nodo.getDato()):
                     self.Sucesores_Recursivo(nodo.getIzq(), x)
